@@ -8,6 +8,7 @@ var {
     del,
     update
 } = require("../libs/mongo.js");
+var token = require('../libs/token');
 
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
@@ -60,7 +61,7 @@ router.post('/finda', async (req, res, next) => {
         name
     } = req.body;
     console.log(req.body);
-    let data = await find(`ccc`,{
+    let data = await find(`ccc`, {
         name
     });
     res.send(data);
@@ -76,14 +77,36 @@ router.post('/findg', async (req, res, next) => {
         description
     } = req.body;
     console.log(nuname);
-    let data = await update(`ccc`,{
+    let data = await update(`ccc`, {
         name
-    },{
-        name:nuname,
-        age:age,
-        skill:skill,
-        description:description
-    });
+    }, {
+            name: nuname,
+            age: age,
+            skill: skill,
+            description: description
+        });
     res.send(data);
 });
+
+//登录
+router.post('/login', async (req, res, next) => {
+      let {
+        inputEmail,
+        inputPassword
+      } = req.body
+      let data = await find(`ccc`, {
+        name: inputEmail
+      })
+      console.log(data);
+      if (data[0].password == inputPassword) {
+        res.send({
+            tokes : token.createToken({
+                inputEmail,
+                inputPassword
+            },1200)
+        });
+      }else {
+        res.send("fail");
+      }
+    });
 module.exports = router;
