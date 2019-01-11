@@ -17,17 +17,27 @@ $(() => {
     }
     signIn.click(async () => {
         // console.log(1)
+        
         let inputEmail = $("#inputEmail").val();
         let inputPassword = $("#inputPassword").val();
-        console.log(inputEmail, inputPassword);
+        if(inputEmail.length == 0){
+            alert('请输入用户名');
+            return;
+        }
+        if(inputPassword.length == 0){
+            alert('请输入密码');
+            return;
+        }
+        // console.log(inputEmail, inputPassword);
         let data = await logined(inputEmail, inputPassword);
-        console.log(data);
+        // console.log(data);
+        
         if (data === 'fail') {
-            console.log('登录失败');
+            // console.log('登录失败');
             alert('用户名或者密码错误');
         } else {
-            console.log('登录成功');
-            alert('登录成功');
+            // console.log('登录成功');
+            // alert('登录成功');
             localStorage.setItem('deng',data.tokes);
             location.href="dashboard.html";
             token.checkToken('deng');

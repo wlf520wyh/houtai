@@ -64,7 +64,7 @@ $(() => {
                 } else {
                     let data = await login(name, age, skill, description);
                     // console.log(data);
-                    alert("插入成功");
+                    alert("插入成功点击跳转到查询页");
                     location.href = "../find.html";
                 }
             });

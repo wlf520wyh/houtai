@@ -18,7 +18,6 @@ $(() => {
             })
         })
     }
-
     let getUserList = () => {
         return new Promise((resolve, reject) => {
             // console.log(666);、
@@ -45,7 +44,7 @@ $(() => {
                         <td>${item.age}</td>
                         <td>${item.skill}</td>
                         <td>${item.description}</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<button class="deltt" style="background: #fff;">删除</button></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="deltt" style="background: #fff;">Del</button></td>
                     </tr>            
                 `
             }).join("");
@@ -80,6 +79,6 @@ $(() => {
     });
 
     $("#btn_del").on('click', function () {
-        alert('做梦');
+        alert('Run failed');
     });
 })

@@ -48,7 +48,7 @@ $(() => {
             $('#btn_block').on('click', async function () {
                 let name = await names();
                 let datas = await findes(name);
-                let htmls = datas.map((item, index) => {
+                let htmls = datas.map((item) => {
                     return `
                     <tr>
                         <td>${item._id}</td>
@@ -60,16 +60,12 @@ $(() => {
                 `
                 }).join("");
                 $("#listed").html(htmls);
-                console.log(datas);
+                // console.log(datas);
             });
         } else {
             location.href = "login.html";
         }
-
-
     })()
-
-
 
     //得到了单个后然后修改单个
     let unames = (
@@ -103,6 +99,7 @@ $(() => {
         let skill = $('#inputAddress2').val();
         let description = $('#inputCity').val();
         let data = await unames(name, nuname, age, skill, description);
+        // console.log(data);
         if (nuname.length == 0) {
             alert("未输入用户名，原名也可以");
             return;
@@ -119,11 +116,14 @@ $(() => {
             alert("未输入备注，，原备注也可以");
             return;
         } else {
-            if (data) {
-                alert('更改成功点击跳到查询页');
-                location.reload();
-            }
+            if(name.length == 0){
+                alert('请先搜索后再更改');
+            }else{
+                if (data) {
+                    alert('更改成功点击跳到查询页');
+                    location.href = "dashboard.html";
+                }
+            } 
         }
-
     });
 })
