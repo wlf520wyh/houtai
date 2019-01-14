@@ -1,7 +1,6 @@
 $(() => {
     //利用原有套路
     // console.log(name);
-
     let getToken = (name, currentPage, qty) => {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -46,6 +45,10 @@ $(() => {
                 });
             }
             $('#btn_block').on('click', async function () {
+                if($("#finds").val().length == 0){
+                    alert("未搜索用户名");
+                    return;
+                }
                 let name = await names();
                 let datas = await findes(name);
                 let htmls = datas.map((item) => {
@@ -93,37 +96,32 @@ $(() => {
         });
     }
     $('#btn_every').on('click', async function () {
-        let name = $("#finds").val();
-        let nuname = $('#inputEmail4').val();
-        let age = $('#inputAddress').val();
-        let skill = $('#inputAddress2').val();
-        let description = $('#inputCity').val();
-        let data = await unames(name, nuname, age, skill, description);
-        // console.log(data);
+            let name = $("#finds").val();
+            let nuname = $('#inputEmail4').val();
+            let age = $('#inputAddress').val();
+            let skill = $('#inputAddress2').val();
+            let description = $('#inputCity').val();
         if (nuname.length == 0) {
-            alert("未输入用户名，原名也可以");
+            alert("未输入用户名");
             return;
         }
         else if (age.length == 0) {
-            alert("未输入年龄，原数也可以");
+            alert("未输入年龄");
             return;
         }
         else if (skill.length == 0) {
-            alert("未输入技能，原技能也可以");
+            alert("未输入技能");
             return;
         }
         else if (description.length == 0) {
-            alert("未输入备注，，原备注也可以");
+            alert("未输入备注");
             return;
         } else {
-            if(name.length == 0){
-                alert('请先搜索后再更改');
-            }else{
-                if (data) {
-                    alert('更改成功点击跳到查询页');
-                    location.href = "dashboard.html";
-                }
-            } 
+            let data = await unames(name, nuname, age, skill, description);
+            if (data) {
+                alert('更改成功点击跳到查询页');
+                location.href = "dashboard.html";
+            }
         }
     });
 })
